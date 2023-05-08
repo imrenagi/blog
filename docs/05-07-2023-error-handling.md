@@ -222,4 +222,4 @@ This approach gives you flexibility to determine what the behavior of your domai
 Another benefit is that you can tailored the arguments required to construct the error message specifically instead of accepting only generic argument like string `Message`. On the above example, since we can set `ID` property, we are know able to change the error message easily without a need to update the source of the error. Imagine where you can pass other objects to the error and use their internal property to construct the error message. This will removes the duplication from where the errors are originating from.
 
 ## References:
-* [Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully) by Dave Chennel. 
+* [Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully) by Dave Cheney. 
