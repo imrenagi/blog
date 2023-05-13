@@ -1,7 +1,7 @@
 ---
 title: Refactoring: Thinking About Problem Domain
-date: 05-14-2023
-tags: go,refactor
+date: 05-13-2023
+tags: "go,refactor"
 ---
 
 # Refactoring: Thinking About Problem Domain
