@@ -108,7 +108,7 @@ Even when I'm not propagating `gorm.ErrNotFound` to the caller anymore, there is
 
 On the handler side, as you have seen, I also had to check all sentinel errors extensively in switch block to ensure that sentinel error is mapped into correct http status code. 
 
-And the worst case was I usually ended up writing many sentinel errors to and mapped them to propoer HTTP status code on the server package.
+And the worst case was I usually ended up writing many sentinel errors to and mapped them to proper HTTP status code on the server package.
 
 ```go
 var ErrNotFound = errors.New("not found")
