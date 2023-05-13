@@ -110,10 +110,10 @@ One way we could approach this is by adding a method called `CanBeUpgraded`. Why
 // than this version
 func (v Version) CanBeUpgraded(to Version) error {
   if v == 0 || to == 0 {
-    return nil, fmt.Errorf("version invalid. cant be unknown")
+    return fmt.Errorf("version invalid. cant be unknown")
   }
   if to <= v {
-    return nil, fmt.Errorf("new version must be greater than %d", v)
+    return fmt.Errorf("new version must be greater than %d", v)
   }
   return nil
 }
