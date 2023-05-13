@@ -15,6 +15,12 @@ To give you idea about the entities, we have something similar (but not exactly 
 ```go
 type Version int
 
+const (
+  Unknown Version = iota
+  POSTGRES10
+  POSTGRES11
+)
+
 // Instance is representation of one postgresql node. It could be either primary or replica instance.
 type Instance struct {
   // ... other attributes
@@ -39,7 +45,7 @@ Since we know that user should be able to create new upgrade, it is pretty easy 
 ```go
 func NewUpgrade(instance *Instance, oldVersion, newVersion Version) (*Upgrade, error) {
   if oldVersion == 0 || newVersion == 0 {
-    return nil, fmt.Errorf("version invalid, version must be 9 - 15")
+    return nil, fmt.Errorf("version invalid, cant be unknown")
   }
   if newVersion <= oldVersion {
     return nil, fmt.Errorf("new version must be greater than %d", oldVersion)
@@ -68,7 +74,7 @@ So initially what we can do to make the code better is to move the `NewUpgrade` 
 // InitializeUpgrade create new instance of upgrade if it is valid
 func (i *Instance) InitializeUpgrade(toVersion Version) (*Upgrade, error) {
   if i.Version == 0 || toVersion == 0 {
-    return nil, fmt.Errorf("version invalid, version must be 9 - 15")
+    return nil, fmt.Errorf("version invalid")
   }
   if toVersion <= i.Version {
     return nil, fmt.Errorf("new version must be greater than %d", i.Version)
@@ -104,10 +110,10 @@ One way we could approach this is by adding a method called `CanBeUpgraded`. Why
 // than this version
 func (v Version) CanBeUpgraded(to Version) error {
   if v == 0 || to == 0 {
-    return nil, fmt.Errorf("version invalid, version must be 9 - 15")
+    return nil, fmt.Errorf("version invalid. cant be unknown")
   }
   if to <= v {
-    return nil, fmt.Errorf("new   version must be greater than %d", v)
+    return nil, fmt.Errorf("new version must be greater than %d", v)
   }
   return nil
 }
